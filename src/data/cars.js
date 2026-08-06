@@ -39,6 +39,51 @@ import {
 /** @type {Car[]} */
 export const CARS = [
   {
+    id: 'mercedes-g-brabus',
+    name: 'Mercedes G Wagon Brabus',
+    category: 'ultra-luxury',
+    pricePerDay: 150000,
+    image: MERCEDES_G_WAGON_BRABUS_IMAGE,
+    alt: 'Mercedes-Benz G-Class W463 luxury SUV — Brabus style rental Pakistan',
+    featured: true,
+  },
+  {
+    id: 'range-rover-vogue',
+    name: 'Range Rover Vogue',
+    category: 'ultra-luxury',
+    pricePerDay: 90000,
+    image: RANGE_ROVER_VOGUE_IMAGE,
+    alt: '2018 Range Rover Vogue SDV6 Autobiography luxury SUV rental Pakistan',
+    featured: true,
+  },
+  {
+    id: 'mercedes-maybach',
+    name: 'Mercedes Maybach S Class',
+    category: 'ultra-luxury',
+    pricePerDay: 90000,
+    image: MERCEDES_MAYBACH_S_CLASS_IMAGE,
+    alt: 'Mercedes-Maybach S680 4MATIC ultra luxury sedan rental Pakistan',
+    featured: true,
+  },
+  {
+    id: 'bentley-flying-spur',
+    name: 'Bentley',
+    category: 'ultra-luxury',
+    pricePerDay: 270000,
+    image: BENTLEY_IMAGE,
+    alt: '2020 Bentley Flying Spur First Edition luxury sedan rental Pakistan',
+    featured: true,
+  },
+  {
+    id: 'bmw-7-series',
+    name: 'BMW 7 Series',
+    category: 'ultra-luxury',
+    pricePerDay: 150000,
+    image: BMW_7_SERIES_IMAGE,
+    alt: '2022 BMW 740i xDrive G11 executive sedan rental Pakistan',
+    featured: true,
+  },
+  {
     id: 'bmw-i8-black',
     name: 'BMW i8 (Black)',
     category: 'ultra-luxury',
@@ -64,33 +109,9 @@ export const CARS = [
     alt: 'Porsche Taycan 4S electric luxury sedan rental Pakistan',
     featured: true,
   },
-  {
-    id: 'bentley-flying-spur',
-    name: 'Bentley',
-    category: 'ultra-luxury',
-    pricePerDay: 270000,
-    image: BENTLEY_IMAGE,
-    alt: '2020 Bentley Flying Spur First Edition luxury sedan rental Pakistan',
-    featured: true,
-  },
-  {
-    id: 'mercedes-g-brabus',
-    name: 'Mercedes G Wagon Brabus',
-    category: 'ultra-luxury',
-    pricePerDay: 150000,
-    image: MERCEDES_G_WAGON_BRABUS_IMAGE,
-    alt: 'Mercedes-Benz G-Class W463 luxury SUV — Brabus style rental Pakistan',
-    featured: true,
-  },
-  {
-    id: 'bmw-7-series',
-    name: 'BMW 7 Series',
-    category: 'ultra-luxury',
-    pricePerDay: 150000,
-    image: BMW_7_SERIES_IMAGE,
-    alt: '2022 BMW 740i xDrive G11 executive sedan rental Pakistan',
-    featured: true,
-  },
+  
+  
+ 
   {
     id: 'bmw-740li',
     name: 'BMW 740Li',
@@ -99,24 +120,8 @@ export const CARS = [
     image: BMW_740LI_IMAGE,
     alt: 'BMW 740Li G12 long-wheelbase executive sedan rental Pakistan',
   },
-  {
-    id: 'range-rover-vogue',
-    name: 'Range Rover Vogue',
-    category: 'ultra-luxury',
-    pricePerDay: 90000,
-    image: RANGE_ROVER_VOGUE_IMAGE,
-    alt: '2018 Range Rover Vogue SDV6 Autobiography luxury SUV rental Pakistan',
-    featured: true,
-  },
-  {
-    id: 'mercedes-maybach',
-    name: 'Mercedes Maybach S Class',
-    category: 'ultra-luxury',
-    pricePerDay: 90000,
-    image: MERCEDES_MAYBACH_S_CLASS_IMAGE,
-    alt: 'Mercedes-Maybach S680 4MATIC ultra luxury sedan rental Pakistan',
-    featured: true,
-  },
+
+  
   {
     id: 'mercedes-c-class',
     name: 'Mercedes C Class',
