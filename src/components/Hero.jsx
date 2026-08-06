@@ -1,8 +1,8 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { HiArrowRight, HiOutlineSparkles } from 'react-icons/hi'
+import { Calendar, Car, Sliders, Search } from 'lucide-react'
 import { heroImage } from '../constants/carImages'
 import { SITE, whatsappHref } from '../constants/site'
-import { formatPkr } from '../data/cars'
 
 const container = {
   hidden: { opacity: 0 },
@@ -13,167 +13,204 @@ const container = {
 }
 
 const item = {
-  hidden: { opacity: 0, y: 32 },
+  hidden: { opacity: 0, y: 30 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
   },
 }
 
-export default function Hero() {
+export default function Hero({ onSearch }) {
+  const [vehicleType, setVehicleType] = useState('all')
+  const [packageType, setPackageType] = useState('daily')
+  const [rentalDate, setRentalDate] = useState('')
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault()
+    
+    // Pass vehicle type filter and package selections to listings
+    if (onSearch) {
+      onSearch('', vehicleType)
+    }
+
+    // Scroll to vehicles catalog smoothly
+    const carsSection = document.getElementById('cars')
+    if (carsSection) {
+      carsSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  };
+
   return (
     <section
       id="home"
-      className="relative isolate min-h-[100svh] overflow-hidden section-pad pb-28 pt-28 md:pb-36 md:pt-36 lg:pb-44"
+      className="relative isolate min-h-[94svh] flex flex-col justify-center pb-28 pt-24 md:pb-36 md:pt-32 overflow-hidden bg-[#0D0F12]"
       aria-labelledby="hero-heading"
     >
+      {/* Background Image & Overlay */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-20">
         <img
           src={heroImage}
-          alt="Mercedes-Maybach S680 luxury executive car rental Pakistan"
+          alt={`Luxury car rental — ${SITE.name} Pakistan`}
           fetchPriority="high"
           decoding="async"
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-[center_35%] brightness-[0.45] contrast-[1.05]"
           width={2200}
           height={1400}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/90 via-neutral-950/70 to-neutral-950/95" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(201,169,98,0.22),transparent_50%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#fafafa] to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0D0F12] via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0D0F12] via-[#0D0F12]/80 to-transparent" />
+        
+        {/* Fine gold micro particles */}
+        <div className="cyan-particles absolute inset-0 opacity-25" />
       </div>
 
-      <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-14 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+      {/* Hero Content */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="max-w-3xl space-y-8 text-white"
+          className="max-w-3xl space-y-6 text-left"
         >
-          <motion.div
+          {/* Gold Badge */}
+          <motion.span
             variants={item}
-            className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-gold-light backdrop-blur-md"
+            className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/35 bg-[#D4AF37]/5 px-4.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.25em] text-[#E5C158] backdrop-blur-md"
           >
-            <HiOutlineSparkles className="text-base" />
-            {SITE.tagline}
-          </motion.div>
+            <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37] shadow-[0_0_8px_#D4AF37]" />
+            Pakistan&apos;s Premier Luxury Fleet
+          </motion.span>
 
+          {/* Headline */}
           <motion.h1
             id="hero-heading"
             variants={item}
-            className="font-display text-balance text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.5rem]"
+            className="text-balance text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-[4rem] font-display"
           >
-            {SITE.heroHeading.split('Across Pakistan')[0]}
-            <span className="gold-gradient-text">Across Pakistan</span>
+            EXPLORE YOUR <br />
+            <span className="text-[#D4AF37] drop-shadow-[0_0_20px_rgba(212,175,55,0.15)]">DREAM DRIVE</span>
           </motion.h1>
 
+          {/* Subtext */}
           <motion.p
             variants={item}
-            className="max-w-2xl text-base leading-relaxed text-neutral-300 sm:text-lg"
+            className="max-w-xl text-sm leading-relaxed text-neutral-400 sm:text-base"
           >
-            Luxury fleet · Executive chauffeurs · Wedding convoys · VIP
-            transport — serving{' '}
-            {SITE.cities.map((c, i) => (
-              <span key={c}>
-                {i > 0 && (i === SITE.cities.length - 1 ? ' & ' : ', ')}
-                <strong className="font-medium text-white">{c}</strong>
-              </span>
-            ))}
-            .
+            Reserve Premium Vehicles &amp; Unmatched Wedding Convoy Deals Nationwide. Experience VIP treatment with our high-end fleet and professional protocol setups.
           </motion.p>
 
+          {/* CTAs */}
           <motion.div
             variants={item}
-            className="flex flex-col gap-3 sm:flex-row sm:items-center"
+            className="flex flex-wrap gap-4 pt-3"
           >
             <motion.a
               href={whatsappHref(
-                'Hi Jinnah Motors, I would like to book a luxury car. Please share availability.',
+                `Hi ${SITE.name}, I would like to book a luxury car. Please share available models.`,
               )}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ y: -3, scale: 1.02 }}
+              whileHover={{ y: -1, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="btn-primary"
+              className="rounded-[4px] bg-[#D4AF37] px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-[#0D0F12] transition hover:bg-[#E5C158] shadow-[0_4px_16px_rgba(212,175,55,0.3)] border-none"
             >
               Book Now
-              <HiArrowRight className="text-lg" />
             </motion.a>
+            
             <motion.a
-              href="#fleet-showcase"
-              whileHover={{ y: -3, scale: 1.02 }}
+              href={whatsappHref(
+                `Hi ${SITE.name}, I would like to inquire about wedding/VIP convoy rates. Please guide me.`,
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -1 }}
               whileTap={{ scale: 0.98 }}
-              className="btn-outline"
+              className="inline-flex items-center justify-center rounded-[4px] border border-white/20 bg-black/40 px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-white backdrop-blur-sm transition hover:border-[#D4AF37] hover:text-[#D4AF37]"
             >
-              Explore Luxury Fleet
+              Request Convoy Protocol
             </motion.a>
           </motion.div>
-
-          <motion.dl
-            variants={item}
-            className="grid max-w-2xl grid-cols-2 gap-6 border-t border-white/10 pt-8 sm:grid-cols-4"
-          >
-            {[
-              { label: 'Fleet Size', value: '28+ Vehicles' },
-              { label: 'Ultra Luxury', value: 'Mercedes · BMW · Bentley' },
-              { label: 'Coverage', value: 'Nationwide' },
-              { label: 'Support', value: '24/7 WhatsApp' },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <dt className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gold-light/80">
-                  {stat.label}
-                </dt>
-                <dd className="mt-1.5 text-sm font-medium text-white sm:text-[15px]">
-                  {stat.value}
-                </dd>
-              </div>
-            ))}
-          </motion.dl>
         </motion.div>
-
-        <motion.aside
-          initial={{ opacity: 0, y: 48 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-md lg:shrink-0"
-          aria-label="Featured rental highlight"
-        >
-          <div className="glass-dark relative overflow-hidden rounded-[32px] border border-white/10 p-7 text-left shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)]">
-            <div className="pointer-events-none absolute -right-12 -top-12 h-48 w-48 rounded-full bg-gold/20 blur-3xl" />
-            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-gold-light/80">
-              Executive Concierge
-            </p>
-            <p className="mt-4 font-display text-2xl font-semibold leading-snug text-white">
-              From Prado to Maybach — one trusted partner for every milestone.
-            </p>
-            <div className="mt-6 space-y-3 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-neutral-400">Economy from</span>
-                <span className="text-sm font-semibold text-white">
-                  {formatPkr(3500)}
-                  <span className="text-xs font-normal text-neutral-500">/day</span>
-                </span>
-              </div>
-              <div className="h-px bg-white/10" />
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-neutral-400">Ultra luxury from</span>
-                <span className="text-sm font-semibold gold-gradient-text">
-                  {formatPkr(100000)}
-                  <span className="text-xs font-normal text-neutral-500">/day</span>
-                </span>
-              </div>
-            </div>
-            <motion.a
-              href="#cars"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="mt-6 flex w-full items-center justify-center rounded-full bg-white px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-950"
-            >
-              View Full Fleet
-            </motion.a>
-          </div>
-        </motion.aside>
       </div>
+
+      {/* Embedded Quick Reservation Widget */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.45, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+        className="mx-auto mt-16 w-full max-w-7xl px-5 sm:px-6 lg:px-8 relative z-20"
+      >
+        <form
+          onSubmit={handleSearchSubmit}
+          className="rounded-xl border border-white/10 bg-[#1E2229]/80 p-5 backdrop-blur-md shadow-2xl grid gap-4 sm:grid-cols-2 lg:grid-cols-4 items-end"
+        >
+          {/* Vehicle Type selection */}
+          <div className="space-y-2">
+            <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-400">
+              <Car className="h-3.5 w-3.5 text-[#D4AF37]" />
+              Vehicle Type
+            </label>
+            <select
+              value={vehicleType}
+              onChange={(e) => setVehicleType(e.target.value)}
+              className="w-full rounded-[4px] border border-white/10 bg-[#0D0F12] px-3.5 py-2.5 text-xs font-medium text-white outline-none transition focus:border-[#D4AF37]"
+            >
+              <option value="all">All Vehicles</option>
+              <option value="suv">SUV &amp; Protocol</option>
+              <option value="ultra-luxury">Exotics &amp; Supercars</option>
+              <option value="sedan">Executive Sedans</option>
+              <option value="limousine">VIP Limousines</option>
+            </select>
+          </div>
+
+          {/* Rental Date picker */}
+          <div className="space-y-2">
+            <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-400">
+              <Calendar className="h-3.5 w-3.5 text-[#D4AF37]" />
+              Rental Date
+            </label>
+            <input
+              type="date"
+              value={rentalDate}
+              onChange={(e) => setRentalDate(e.target.value)}
+              className="w-full rounded-[4px] border border-white/10 bg-[#0D0F12] px-3.5 py-2.5 text-xs font-medium text-white outline-none transition focus:border-[#D4AF37] color-scheme-dark"
+            />
+          </div>
+
+          {/* Service/Package selection */}
+          <div className="space-y-2">
+            <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-400">
+              <Sliders className="h-3.5 w-3.5 text-[#D4AF37]" />
+              Package / Convoy
+            </label>
+            <select
+              value={packageType}
+              onChange={(e) => setPackageType(e.target.value)}
+              className="w-full rounded-[4px] border border-white/10 bg-[#0D0F12] px-3.5 py-2.5 text-xs font-medium text-white outline-none transition focus:border-[#D4AF37]"
+            >
+              <option value="daily">Daily Rental (No Package)</option>
+              <option value="barat">Royal Barat Package</option>
+              <option value="mehndi">Mehndi Executive Convoy</option>
+              <option value="vogue">Royal Vogue Groom Entry</option>
+              <option value="suv-convoy">Premium SUV Convoy</option>
+            </select>
+          </div>
+
+          {/* Submit Search button */}
+          <div>
+            <motion.button
+              type="submit"
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              className="w-full rounded-[4px] bg-[#D4AF37] py-3 text-xs font-bold uppercase tracking-wider text-[#0D0F12] transition hover:bg-[#E5C158] flex items-center justify-center gap-2 border-none shadow-[0_4px_12px_rgba(212,175,55,0.2)]"
+            >
+              <Search className="h-3.5 w-3.5" />
+              Search Fleet
+            </motion.button>
+          </div>
+        </form>
+      </motion.div>
     </section>
   )
 }

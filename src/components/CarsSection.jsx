@@ -1,8 +1,8 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaWhatsapp } from 'react-icons/fa'
-import { whatsappHref } from '../constants/site'
-import { CARS, CATEGORIES, formatPkr } from '../data/cars'
+import { Search, X } from 'lucide-react'
+import { CARS } from '../data/cars'
+import VehicleCard from './VehicleCard'
 
 const grid = {
   hidden: { opacity: 0 },
@@ -22,86 +22,142 @@ const card = {
   exit: { opacity: 0, scale: 0.96, transition: { duration: 0.2 } },
 }
 
-const CATEGORY_LABELS = {
-  'ultra-luxury': 'Ultra Luxury',
-  limousine: 'Limousine',
-  suv: 'SUV',
-  sedan: 'Sedan',
-  pickup: 'Pickup',
-  economy: 'Economy',
-  van: 'Van',
-}
+const tabs = [
+  { id: 'all', label: 'All Vehicles' },
+  { id: 'suv', label: 'Suv & Protocol' },
+  { id: 'exotics', label: 'Exotics / Supercars' },
+  { id: 'sedans', label: 'Sedans' },
+]
 
-export default function CarsSection() {
-  const [active, setActive] = useState('all')
+export default function CarsSection({ searchQuery, onSearch, selectedCategory, onSelectCategory }) {
+  
+  const filtered = useMemo(() => {
+    let list = CARS
 
-  const filtered = useMemo(
-    () =>
-      active === 'all' ? CARS : CARS.filter((c) => c.category === active),
-    [active],
-  )
+    // Filter by category tab
+    if (selectedCategory === 'suv') {
+      list = CARS.filter(
+        (c) =>
+          c.category === 'suv' ||
+          c.category === 'limousine' ||
+          c.category === 'pickup'
+      )
+    } else if (selectedCategory === 'exotics') {
+      list = CARS.filter((c) => c.category === 'ultra-luxury')
+    } else if (selectedCategory === 'sedans') {
+      list = CARS.filter(
+        (c) =>
+          c.category === 'sedan' ||
+          c.category === 'economy' ||
+          c.category === 'van'
+      )
+    }
+
+    // Filter by text search query
+    const q = searchQuery.trim().toLowerCase()
+    if (q) {
+      list = list.filter((c) => c.name.toLowerCase().includes(q))
+    }
+
+    return list
+  }, [searchQuery, selectedCategory])
 
   return (
     <section
       id="cars"
-      className="scroll-mt-28 bg-[#fafafa] section-pad md:scroll-mt-32"
+      className="scroll-mt-28 bg-[#0D0F12] section-pad md:scroll-mt-32 border-t border-white/5"
       aria-labelledby="cars-heading"
     >
       <div className="mx-auto max-w-7xl">
-        <motion.header
-          initial={{ opacity: 0, y: 24 }}
+        
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-3xl"
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center"
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-gold-dark">
-            Complete rental fleet
-          </p>
+          <p className="section-heading">Exclusive Rental Fleet</p>
           <h2
             id="cars-heading"
-            className="font-display mt-4 text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl lg:text-[2.75rem]"
+            className="mt-3 text-3xl font-bold uppercase tracking-tight text-white sm:text-4xl font-display"
           >
-            Luxury car rental fleet in Pakistan
+            All Vehicles
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-neutral-600 sm:text-base">
-            Transparent daily rates on sedans, SUVs, ultra-luxury exotics,
-            limousines, and vans. Filter by category or book instantly via
-            WhatsApp — available in Gujrat, Lahore, Islamabad &amp; Karachi.
+          <div className="ornament-divider mt-5">
+            <span className="h-1.5 w-1.5 rotate-45 bg-[#D4AF37]/75" />
+          </div>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-neutral-400">
+            Browse our complete nationwide collection of executive sedans, protocol SUVs, exotic supercars, and stretch limousines.
           </p>
-        </motion.header>
+        </motion.div>
 
-        <div
-          className="hide-scrollbar mt-10 flex gap-2 overflow-x-auto pb-2"
-          role="tablist"
-          aria-label="Filter fleet by category"
-        >
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              role="tab"
-              aria-selected={active === cat.id}
-              onClick={() => setActive(cat.id)}
-              className={`shrink-0 rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] transition ${
-                active === cat.id
-                  ? 'bg-neutral-950 text-gold-light shadow-lg'
-                  : 'border border-neutral-200 bg-white text-neutral-700 hover:border-neutral-300 hover:bg-neutral-50'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
+        {/* Category Filter Bar */}
+        <div className="mt-12 flex flex-col items-center gap-6 border-b border-white/10 pb-6 lg:flex-row lg:justify-between lg:items-center">
+          {/* Tabs */}
+          <div className="flex flex-wrap justify-center gap-2">
+            {tabs.map((tab) => {
+              const active = selectedCategory === tab.id
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => onSelectCategory(tab.id)}
+                  className={`rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition ${
+                    active
+                      ? 'bg-[#D4AF37] text-[#0D0F12] shadow-[0_4px_12px_rgba(212,175,55,0.25)]'
+                      : 'border border-white/10 bg-white/5 text-neutral-400 hover:border-white/20 hover:text-white'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Search bar inside header */}
+          <div className="relative w-full max-w-xs">
+            <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
+            <input
+              type="text"
+              placeholder="Search by name..."
+              value={searchQuery}
+              onChange={(e) => onSearch(e.target.value)}
+              className="w-full rounded-full border border-white/10 bg-white/5 pl-10 pr-9 py-2 text-xs text-white placeholder:text-neutral-500 outline-none transition focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/35"
+            />
+            {searchQuery ? (
+              <button
+                type="button"
+                onClick={() => onSearch('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-0.5 text-neutral-400 hover:bg-white/10 hover:text-white"
+                aria-label="Clear search"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            ) : null}
+          </div>
         </div>
 
+        {/* Results Info */}
+        {searchQuery || selectedCategory !== 'all' ? (
+          <div className="mt-6 text-center lg:text-left">
+            <span className="text-xs text-neutral-400 uppercase tracking-wider">
+              Showing {filtered.length} matching vehicle{filtered.length !== 1 ? 's' : ''}
+            </span>
+          </div>
+        ) : null}
+
+        {/* Responsive Grid */}
         <motion.ul
           variants={grid}
           initial="hidden"
-          animate="show"
-          className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+          className="mt-8 grid gap-7 sm:grid-cols-2 lg:grid-cols-3"
         >
           <AnimatePresence mode="popLayout">
-            {filtered.map((car) => (
+            {filtered.map((car, index) => (
               <motion.li
                 key={car.id}
                 layout
@@ -109,92 +165,32 @@ export default function CarsSection() {
                 initial="hidden"
                 animate="show"
                 exit="exit"
-                whileHover={{ y: -8 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-                className={`group flex flex-col overflow-hidden rounded-[24px] border bg-white shadow-[0_20px_60px_-40px_rgba(0,0,0,0.25)] ${
-                  car.category === 'ultra-luxury' || car.category === 'limousine'
-                    ? 'border-gold/25 ring-1 ring-gold/10'
-                    : 'border-neutral-200/80'
-                }`}
               >
-                <div className="relative aspect-[16/11] overflow-hidden bg-neutral-100">
-                  <img
-                    src={car.image}
-                    alt={car.alt}
-                    loading="lazy"
-                    decoding="async"
-                    width={640}
-                    height={440}
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-transparent" />
-                  <span className="absolute left-3 top-3 rounded-full bg-neutral-950/75 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-gold-light backdrop-blur-sm">
-                    {CATEGORY_LABELS[car.category]}
-                  </span>
-                </div>
-
-                <div className="flex flex-1 flex-col gap-3 p-5">
-                  <div>
-                    <h3 className="text-[15px] font-semibold leading-snug text-neutral-950">
-                      {car.name}
-                    </h3>
-                    {car.note ? (
-                      <p className="mt-1 text-[11px] text-neutral-500">
-                        {car.note}
-                      </p>
-                    ) : null}
-                  </div>
-
-                  <div className="mt-auto rounded-xl bg-neutral-50 px-4 py-3 ring-1 ring-neutral-100">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-neutral-500">
-                      Daily rate
-                    </p>
-                    <p className="mt-0.5 text-lg font-semibold text-neutral-950">
-                      {formatPkr(car.pricePerDay)}
-                      <span className="text-xs font-medium text-neutral-500">
-                        {' '}
-                        / day
-                      </span>
-                    </p>
-                  </div>
-
-                  <div className="flex gap-2">
-                    <motion.a
-                      href={whatsappHref(
-                        `Hi Jinnah Motors, I would like to book the ${car.name} at ${formatPkr(car.pricePerDay)}/day. Please confirm availability.`,
-                      )}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-emerald-500 py-2.5 text-xs font-semibold text-white shadow-md"
-                    >
-                      <FaWhatsapp className="text-sm" />
-                      WhatsApp
-                    </motion.a>
-                    <motion.a
-                      href={whatsappHref(
-                        `Book Now: ${car.name} — ${formatPkr(car.pricePerDay)}/day`,
-                      )}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="inline-flex flex-1 items-center justify-center rounded-full bg-neutral-950 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-gold-light"
-                    >
-                      Book Now
-                    </motion.a>
-                  </div>
-                </div>
+                <VehicleCard car={car} index={index} />
               </motion.li>
             ))}
           </AnimatePresence>
         </motion.ul>
 
+        {/* Empty state */}
         {filtered.length === 0 ? (
-          <p className="mt-12 text-center text-neutral-500">
-            No vehicles in this category.
-          </p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-16 text-center text-neutral-400"
+          >
+            <p className="text-sm">No vehicles found matching your search options.</p>
+            <button
+              type="button"
+              onClick={() => {
+                onSearch('')
+                onSelectCategory('all')
+              }}
+              className="mt-4 rounded-[4px] border border-[#D4AF37] px-5 py-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37] transition hover:bg-[#D4AF37]/10"
+            >
+              Reset Filters
+            </button>
+          </motion.div>
         ) : null}
       </div>
     </section>

@@ -28,11 +28,9 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative scroll-mt-28 bg-neutral-50 px-6 py-20 md:scroll-mt-32 md:py-28"
+      className="relative scroll-mt-28 bg-dark section-pad md:scroll-mt-32"
       aria-labelledby="contact-heading"
     >
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-64 bg-gradient-to-t from-white to-transparent" />
-
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -41,19 +39,16 @@ export default function Contact() {
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-2xl"
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-gold-dark">
-            Contact &amp; routing
-          </p>
+          <p className="section-heading">Contact</p>
           <h2
             id="contact-heading"
-            className="mt-3 text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl"
+            className="mt-3 text-3xl font-bold tracking-tight text-ivory-warm sm:text-4xl"
           >
-            Let&apos;s map your convoy—down to the final U-turn.
+            Get in touch
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-neutral-600 sm:text-[15px]">
-            Share your dates, preferred vehicles, and route sketch. We&apos;ll
-            reply on WhatsApp with availability, transparent pricing, and a
-            choreographed timeline.
+          <p className="mt-4 text-sm leading-relaxed text-muted sm:text-[15px]">
+            Share your dates, preferred vehicles, and route. We&apos;ll reply on
+            WhatsApp with availability and transparent pricing.
           </p>
         </motion.div>
 
@@ -65,71 +60,58 @@ export default function Contact() {
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-5"
           >
-            <div className="overflow-hidden rounded-[28px] border border-neutral-200/90 bg-white shadow-[0_24px_80px_-48px_rgba(15,23,42,0.75)]">
+            <div className="overflow-hidden rounded-2xl border border-border bg-dark-card">
               <iframe
-                title="Jinnah Motors location map"
+                title={`${SITE.name} location map`}
                 src={mapSrc}
                 className="h-64 w-full border-0 sm:h-72"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-              <div className="border-t border-neutral-100 p-5 text-sm text-neutral-600">
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-neutral-500">
-                  Google Maps preview
-                </p>
-                <p className="mt-2">
-                  Pin is anchored to Shell Pump Chowk for quick orientation—tap
-                  directions inside Maps for live routing.
-                </p>
-              </div>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="flex gap-3 rounded-2xl border border-neutral-200/90 bg-white/90 p-4 shadow-sm backdrop-blur-md">
-                <span className="mt-0.5 inline-flex h-9 w-9 flex-none items-center justify-center rounded-xl bg-neutral-950 text-gold-light">
-                  <HiOutlineLocationMarker className="text-lg" />
-                </span>
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-500">
-                    Address
-                  </p>
-                  <p className="mt-1 text-sm text-neutral-800">
-                    {SITE.addressLine}
-                  </p>
+              {[
+                {
+                  icon: HiOutlineLocationMarker,
+                  label: 'Address',
+                  content: SITE.addressLine,
+                },
+                {
+                  icon: HiPhone,
+                  label: 'Phone',
+                  content: (
+                    <a href={phoneDialHref} className="hover:text-cyan">
+                      {SITE.phoneDisplay}
+                    </a>
+                  ),
+                },
+                {
+                  icon: HiMail,
+                  label: 'Email',
+                  content: (
+                    <a href={`mailto:${SITE.email}`} className="hover:text-cyan">
+                      {SITE.email}
+                    </a>
+                  ),
+                  span: 2,
+                },
+              ].map(({ icon: Icon, label, content, span }) => (
+                <div
+                  key={label}
+                  className={`flex gap-3 rounded-xl border border-border bg-dark-card p-4 ${span === 2 ? 'sm:col-span-2' : ''}`}
+                >
+                  <span className="mt-0.5 inline-flex h-9 w-9 flex-none items-center justify-center rounded-lg bg-cyan/10 text-cyan">
+                    <Icon className="text-lg" />
+                  </span>
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-muted">
+                      {label}
+                    </p>
+                    <p className="mt-1 text-sm text-ivory-warm">{content}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex gap-3 rounded-2xl border border-neutral-200/90 bg-white/90 p-4 shadow-sm backdrop-blur-md">
-                <span className="mt-0.5 inline-flex h-9 w-9 flex-none items-center justify-center rounded-xl bg-neutral-950 text-gold-light">
-                  <HiPhone className="text-lg" />
-                </span>
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-500">
-                    Phone
-                  </p>
-                  <a
-                    href={phoneDialHref}
-                    className="mt-1 block text-sm font-medium text-neutral-900 hover:text-gold-dark"
-                  >
-                    {SITE.phoneDisplay}
-                  </a>
-                </div>
-              </div>
-              <div className="flex gap-3 rounded-2xl border border-neutral-200/90 bg-white/90 p-4 shadow-sm backdrop-blur-md sm:col-span-2">
-                <span className="mt-0.5 inline-flex h-9 w-9 flex-none items-center justify-center rounded-xl bg-neutral-950 text-gold-light">
-                  <HiMail className="text-lg" />
-                </span>
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-500">
-                    Email
-                  </p>
-                  <a
-                    href={`mailto:${SITE.email}`}
-                    className="mt-1 block text-sm font-medium text-neutral-900 hover:text-gold-dark"
-                  >
-                    {SITE.email}
-                  </a>
-                </div>
-              </div>
+              ))}
             </div>
           </motion.div>
 
@@ -139,84 +121,68 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.22 }}
             transition={{ duration: 0.65, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
-            className="relative overflow-hidden rounded-[30px] border border-neutral-200/90 bg-white/95 p-[1px] shadow-[0_26px_80px_-52px_rgba(15,23,42,0.8)] backdrop-blur-md"
+            className="rounded-2xl border border-cyan/20 bg-dark-card p-8"
           >
-            <div className="rounded-[29px] bg-gradient-to-br from-neutral-950 via-neutral-950 to-neutral-900 p-[1px]">
-              <div className="rounded-[28px] bg-white px-8 py-8 sm:px-10 sm:py-10">
-                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-neutral-600">
-                  Project your routes
-                </p>
-                <p className="mt-3 text-xl font-semibold text-neutral-950">
-                  Reach the concierge desk
-                </p>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan">
+              Send a message
+            </p>
+            <p className="mt-2 text-xl font-bold text-ivory-warm">Reach us on WhatsApp</p>
 
-                <div className="mt-8 space-y-5">
-                  <label className="block text-sm font-medium text-neutral-800">
-                    Name
-                    <input
-                      required
-                      type="text"
-                      name="name"
-                      autoComplete="name"
-                      value={form.name}
-                      onChange={(e) =>
-                        setForm((f) => ({ ...f, name: e.target.value }))
-                      }
-                      className="mt-2 w-full rounded-2xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none ring-1 ring-transparent transition focus:border-transparent focus:bg-white focus:ring-gold"
-                      placeholder="e.g. Abdullah Khan"
-                    />
-                  </label>
-                  <label className="block text-sm font-medium text-neutral-800">
-                    Phone
-                    <input
-                      required
-                      type="tel"
-                      name="phone"
-                      autoComplete="tel"
-                      value={form.phone}
-                      onChange={(e) =>
-                        setForm((f) => ({ ...f, phone: e.target.value }))
-                      }
-                      className="mt-2 w-full rounded-2xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none ring-1 ring-transparent transition focus:border-transparent focus:bg-white focus:ring-gold"
-                      placeholder="03xx xxxxxxx"
-                    />
-                  </label>
-                  <label className="block text-sm font-medium text-neutral-800">
-                    Message
-                    <textarea
-                      name="message"
-                      rows={4}
-                      value={form.message}
-                      onChange={(e) =>
-                        setForm((f) => ({ ...f, message: e.target.value }))
-                      }
-                      className="mt-2 w-full resize-none rounded-2xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none ring-1 ring-transparent transition focus:border-transparent focus:bg-white focus:ring-gold"
-                      placeholder="Dates, route, vehicles, or special requests."
-                    />
-                  </label>
-                </div>
-
-                <motion.button
-                  type="submit"
-                  whileHover={{ y: -1, scale: 1.01 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="mt-8 w-full rounded-full bg-neutral-950 px-4 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-gold-light shadow-[0_22px_60px_-24px_rgba(15,23,42,0.75)]"
-                >
-                  Send via WhatsApp
-                </motion.button>
-
-                {submitted ? (
-                  <p className="mt-4 text-center text-xs text-emerald-600">
-                    Opening WhatsApp with your message…
-                  </p>
-                ) : (
-                  <p className="mt-4 text-center text-xs text-neutral-500">
-                    Submissions open your WhatsApp chat prefilled for quick
-                    confirmation.
-                  </p>
-                )}
-              </div>
+            <div className="mt-8 space-y-5">
+              {[
+                { name: 'name', label: 'Name', type: 'text', placeholder: 'Your name' },
+                { name: 'phone', label: 'Phone', type: 'tel', placeholder: '03xx xxxxxxx' },
+              ].map(({ name, label, type, placeholder }) => (
+                <label key={name} className="block text-sm font-medium text-muted">
+                  {label}
+                  <input
+                    required
+                    type={type}
+                    name={name}
+                    autoComplete={name}
+                    value={form[name]}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, [name]: e.target.value }))
+                    }
+                    className="mt-2 w-full rounded-xl border border-border bg-dark-card px-4 py-3 text-sm text-ivory-warm outline-none transition focus:border-cyan/50 focus:ring-1 focus:ring-cyan/30"
+                    placeholder={placeholder}
+                  />
+                </label>
+              ))}
+              <label className="block text-sm font-medium text-muted">
+                Message
+                <textarea
+                  name="message"
+                  rows={4}
+                  value={form.message}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, message: e.target.value }))
+                  }
+                  className="mt-2 w-full resize-none rounded-xl border border-border bg-dark-card px-4 py-3 text-sm text-ivory-warm outline-none transition focus:border-cyan/50 focus:ring-1 focus:ring-cyan/30"
+                  placeholder="Dates, route, vehicles, or special requests."
+                />
+              </label>
             </div>
+
+            <motion.button
+              type="submit"
+              whileHover={{ y: -1 }}
+              whileTap={{ scale: 0.98 }}
+              className="mt-8 w-full rounded-full bg-cyan py-3 text-sm font-bold uppercase tracking-wide text-[#17130a]"
+            >
+              Send via WhatsApp
+            </motion.button>
+
+            {submitted ? (
+              <p className="mt-4 text-center text-xs text-cyan">
+                Opening WhatsApp with your message…
+              </p>
+            ) : (
+              <p className="mt-4 text-center text-xs text-muted">
+                Submissions open your WhatsApp chat prefilled for quick
+                confirmation.
+              </p>
+            )}
           </motion.form>
         </div>
       </div>

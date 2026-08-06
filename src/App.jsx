@@ -9,14 +9,14 @@ import LoadingScreen from './components/LoadingScreen'
 import Navbar from './components/Navbar'
 import PackagesSection from './components/PackagesSection'
 import StructuredData from './components/StructuredData'
-import Testimonials from './components/Testimonials'
 import WhatsAppFloat from './components/WhatsAppFloat'
 import WhyChooseUs from './components/WhyChooseUs'
 
-const MIN_VISIBLE_MS = 250 // just enough to avoid an ugly flash, not an artificial wait
+const MIN_VISIBLE_MS = 250
 
 function App() {
   const [booting, setBooting] = useState(true)
+  const [carSearch, setCarSearch] = useState('')
 
   useEffect(() => {
     const start = performance.now()
@@ -38,17 +38,16 @@ function App() {
   return (
     <>
       <StructuredData />
-      <div className="min-h-svh bg-[#fafafa] text-neutral-900 antialiased">
+      <div className="min-h-svh bg-dark text-ivory-warm antialiased">
         <LoadingScreen visible={booting} />
         <Navbar />
         <main id="main-content">
-          <Hero />
+          <Hero searchQuery={carSearch} onSearch={setCarSearch} />
           <FleetShowcase />
-          <CarsSection />
           <PackagesSection />
+          <CarsSection searchQuery={carSearch} onSearch={setCarSearch} />
           <WhyChooseUs />
           <AboutSection />
-          <Testimonials />
           <Contact />
         </main>
         <Footer />

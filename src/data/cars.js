@@ -340,5 +340,19 @@ export const CATEGORIES = [
 
 export const FEATURED_CARS = CARS.filter((c) => c.featured)
 
+/** Curated 6-car premium grid: Urus, i8, Taycan, Bentley, G-Wagon, Limo */
+export const PREMIUM_SELECTION_IDS = [
+  'lamborghini-urus',
+  'bmw-i8',
+  'porsche-taycan',
+  'bentley-flying-spur',
+  'mercedes-g-brabus',
+  'lexus-limousine',
+]
+
+export const PREMIUM_SELECTION = PREMIUM_SELECTION_IDS.map((id) =>
+  CARS.find((c) => c.id === id),
+).filter(Boolean)
+
 export const formatPkr = (n) =>
   `PKR ${n.toLocaleString('en-PK', { maximumFractionDigits: 0 })}`

@@ -1,7 +1,9 @@
-import { SITE, SEO } from '../constants/site'
+import { SITE, SEO, SOCIAL } from '../constants/site'
 import { CARS } from '../data/cars'
 
 export default function StructuredData() {
+  const sameAs = Object.values(SOCIAL).filter((url) => url && url !== '#')
+
   const schema = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -18,7 +20,6 @@ export default function StructuredData() {
         address: {
           '@type': 'PostalAddress',
           streetAddress: SITE.addressLine,
-          addressLocality: 'Gujrat',
           addressRegion: 'Punjab',
           addressCountry: 'PK',
         },
@@ -27,11 +28,7 @@ export default function StructuredData() {
           name: city,
         })),
         priceRange: 'PKR 3,500 - PKR 250,000',
-        sameAs: [
-          'https://www.instagram.com/jinnah_motors_gujrat/',
-          'https://www.facebook.com/p/Jinnah-motors-100064184340651/',
-          'https://www.tiktok.com/@jinnah_motors_gujrat',
-        ],
+        ...(sameAs.length ? { sameAs } : {}),
         openingHoursSpecification: {
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: [

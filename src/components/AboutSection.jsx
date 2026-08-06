@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { HiOutlineBadgeCheck } from 'react-icons/hi'
 import { aboutImage } from '../constants/carImages'
 import { SITE } from '../constants/site'
 
@@ -7,10 +6,9 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative scroll-mt-28 bg-white section-pad md:scroll-mt-32"
+      className="relative scroll-mt-28 bg-dark-elevated section-pad md:scroll-mt-32"
       aria-labelledby="about-heading"
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-72 bg-[radial-gradient(circle_at_top,_rgba(201,169,98,0.1),transparent_62%)]" />
       <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">
         <motion.div
           initial={{ opacity: 0, y: 32 }}
@@ -18,33 +16,29 @@ export default function AboutSection() {
           viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-gold-dark">
-            About {SITE.shortName}
-          </p>
+          <p className="section-heading">About {SITE.shortName}</p>
           <h2
             id="about-heading"
-            className="font-display mt-4 text-balance text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl"
+            className="mt-3 text-balance text-3xl font-bold tracking-tight text-ivory-warm sm:text-4xl"
           >
             Pakistan&apos;s trusted partner for luxury &amp; executive ground
             transport
           </h2>
-          <p className="mt-5 max-w-xl text-sm leading-relaxed text-neutral-600 sm:text-base">
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
             Rooted in Gujrat with nationwide reach, {SITE.name} delivers
             late-model sedans, SUVs, ultra-luxury exotics, and limousine convoys
             for weddings, corporate travel, and VIP events across{' '}
             {SITE.cities.join(', ')}.
           </p>
-          <ul className="mt-8 space-y-3.5 text-sm text-neutral-700">
+          <ul className="mt-8 space-y-3.5 text-sm text-ivory-warm/80">
             {[
               '28+ vehicle fleet from economy to Bentley & BMW i8',
-              'Wedding baraat, mehndi & VIP groom entry packages',
+              'Wedding convoy & VIP entry coordination on request',
               'Transparent daily rates — book instantly via WhatsApp',
               'Professional chauffeurs & 24/7 concierge support',
             ].map((point) => (
-              <li key={point} className="flex items-start gap-3">
-                <span className="mt-0.5 inline-flex h-7 w-7 flex-none items-center justify-center rounded-full bg-gold/15 text-gold-dark ring-1 ring-gold/25">
-                  <HiOutlineBadgeCheck className="text-lg" />
-                </span>
+              <li key={point} className="flex items-start gap-3.5">
+                <span className="mt-2 h-1.5 w-1.5 flex-none rotate-45 bg-cyan" />
                 <span>{point}</span>
               </li>
             ))}
@@ -56,25 +50,27 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.75, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
-          className="relative overflow-hidden rounded-[32px]"
+          className="relative overflow-hidden rounded-2xl border border-border"
         >
-          <div className="absolute inset-0 bg-gradient-to-tr from-neutral-950/70 via-transparent to-transparent z-10" />
+          <div className="absolute inset-0 z-10 bg-gradient-to-tr from-dark/70 via-transparent to-transparent" />
+          {/* Gold corner brackets */}
+          <span aria-hidden className="pointer-events-none absolute left-4 top-4 z-20 h-8 w-8 border-l border-t border-cyan/60" />
+          <span aria-hidden className="pointer-events-none absolute right-4 top-4 z-20 h-8 w-8 border-r border-t border-cyan/60" />
           <img
             src={aboutImage}
-            alt="Mercedes-Maybach S680 executive sedan luxury car rental Pakistan"
+            alt="Mercedes-Maybach executive sedan luxury car rental Pakistan"
             className="aspect-[4/5] w-full object-cover sm:aspect-[5/4] lg:min-h-[460px] lg:aspect-auto"
             loading="lazy"
             decoding="async"
             width={1200}
             height={900}
           />
-          <div className="absolute inset-x-6 bottom-6 z-20 rounded-2xl border border-white/20 bg-neutral-950/75 p-5 text-left backdrop-blur-xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-gold-light/80">
+          <div className="absolute inset-x-6 bottom-6 z-20 rounded-xl border border-border bg-dark-card/90 p-5 text-left backdrop-blur-xl">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-cyan">
               Nationwide service
             </p>
-            <p className="mt-2 text-sm font-medium text-white">
-              Gujrat headquarters · Lahore · Islamabad · Karachi — one premium
-              standard everywhere.
+            <p className="mt-2 text-sm font-medium text-ivory-warm">
+              {SITE.cities.join(' · ')} — one premium standard everywhere.
             </p>
           </div>
         </motion.div>
