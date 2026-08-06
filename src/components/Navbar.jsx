@@ -4,11 +4,11 @@ import { Phone, MessageSquare, Menu, X } from 'lucide-react'
 import { SITE, whatsappHref } from '../constants/site'
 
 const links = [
-  { href: '#fleet-showcase', label: 'Luxury Fleet' },
-  { href: '#packages', label: 'Wedding Packages' },
-  { href: '#cars', label: 'All Vehicles' },
-  { href: '#why-us', label: 'Why Us' },
-  { href: '#contact', label: 'Contact' },
+  { href: 'fleet-showcase', label: 'Luxury Fleet' },
+  { href: 'packages', label: 'Wedding Packages' },
+  { href: 'cars', label: 'All Vehicles' },
+  { href: 'why-us', label: 'Why Us' },
+  { href: 'contact', label: 'Contact' },
 ]
 
 export default function Navbar() {
@@ -61,19 +61,16 @@ export default function Navbar() {
             </a>
 
             {/* Quick contact pill */}
-            <div className="hidden xl:flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-neutral-300">
-              <Phone className="h-3 w-3 text-[#D4AF37]" />
-              <span className="font-medium">{SITE.phoneDisplay}</span>
-            </div>
+            
           </div>
 
           {/* Center: Nav links with smooth underlines (Desktop only) */}
-          <div className="hidden lg:flex items-center justify-center gap-7">
+          <div className="hidden lg:flex items-center justify-center gap-5 xl:gap-7">
             {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="relative py-1.5 text-xs font-semibold uppercase tracking-wider text-neutral-300 hover:text-white transition group"
+                className="relative py-1.5 whitespace-nowrap text-xs font-semibold uppercase tracking-wider text-neutral-300 hover:text-white transition group"
               >
                 {link.label}
                 <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#D4AF37] transition-all duration-300 group-hover:w-full" />

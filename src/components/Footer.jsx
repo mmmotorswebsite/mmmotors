@@ -111,6 +111,8 @@ export default function Footer() {
         <p className="text-center">
           © 2026 {SITE.name} — All Rights Reserved
         </p>
+
+        <p className="text-center">Developed By Usman Asif Sandhu (0321-1161139) | DevTorque</p>
       </div>
     </footer>
   )

@@ -1,5 +1,5 @@
 export const SITE = {
-  name: 'MM Motors and Rent a Car',
+  name: 'MM MOTORS & RENT A CAR',
   shortName: 'MM Motors',
   tagline: "Pakistan's Trusted Luxury & Executive Car Rental Service",
   heroHeading: 'Premium Luxury Car Rental Services Across Pakistan',
@@ -7,14 +7,14 @@ export const SITE = {
   whatsappDigits: '923404270451',
   phoneDisplay: '+92 340 4270451',
   // TODO: replace with the real MM Motors business email
-  email: 'info@mmmotors.pk',
+  email: 'majidalialibaba@gmail.com',
   // TODO: replace with the real MM Motors office / pickup address
-  addressLine: 'Punjab, Pakistan',
-  mapEmbedQuery: 'MM+MOTORS+AND+RENT+A+CAR',
+  addressLine: 'Bar Musa, Mandi Bahauddin',
+  mapEmbedQuery: 'MM+Motors+Luxury+Cars+Rental+Bar+Musa+Mandi+Bahauddin',
   // TODO: replace with the real domain once purchased/hosted
-  url: 'https://mmmotors.pk',
+  url: 'https://mmmotorsbarmusa.pk',
   // TODO: confirm the cities you actually serve
-  cities: ['Lahore', 'Islamabad', 'Rawalpindi', 'Karachi'],
+  cities: ['Lahore', 'Islamabad', 'Rawalpindi', 'Jehlum', 'Mandi Bahauddin','Sargodah'],
 }
 
 export const SEO = {
@@ -41,7 +41,7 @@ export const SEO = {
     'MM Motors and Rent a Car',
   ].join(', '),
   // TODO: upload a real hero/OG share image once the domain is live
-  ogImage: 'https://mmmotors.pk/car%20pic.jpeg',
+  ogImage: 'https://mmmotorsbarmusa.pk/car%20pic.jpeg',
 }
 
 export const whatsappHref = (
@@ -51,7 +51,7 @@ export const whatsappHref = (
 
 export const SOCIAL = {
   // TODO: add real MM Motors social links — leave as '#' until ready
-  instagram: '#',
-  facebook: '#',
-  tiktok: '#',
+  instagram: 'https://www.instagram.com/mm_motors_rent_a_cars?utm_source=qr',
+  facebook: 'https://www.facebook.com/share/1BpNBWYu8d/?mibextid=wwXIfr',
+  tiktok: 'https://www.tiktok.com/@mm.motors.barmusa?_r=1&_t=ZS-98eqZbxr6Bg',
 }

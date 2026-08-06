@@ -21,16 +21,14 @@ export const PACKAGES = [
       '1x Mercedes Maybach (Groom Car)',
       '1x Audi A6 (VIP Guests)',
       '10x Honda Civics (Barat Convoy)',
-      'Fuel & Flower Decoration Included',
-      'Professional Chauffeurs',
-      '12-Hour Shift Duration'
+      'Fuel & Flower Decoration Included'
     ],
     image: BARAT_PACKAGE_IMAGE,
     alt: 'Royal Barat Wedding Package with Maybach, Audi A6 and Honda Civics',
   },
   {
     id: 'package-2',
-    name: 'Elite Executive Convoy',
+    name: 'Executive Barat Package',
     cars: [
       { count: 1, name: 'Mercedes Maybach' },
       { count: 1, name: 'Range Rover' },
@@ -44,16 +42,14 @@ export const PACKAGES = [
       '1x Mercedes Maybach (VIP Carriage)',
       '1x Range Rover (Executive Escort)',
       '1x Prado TXL (Protocol Guard)',
-      '1x Toyota Revo Hilux (Utility Support)',
-      'Fuel Excluded (charged on actuals)',
-      'Professional Chauffeurs included'
+      '1x Toyota Revo Hilux (Utility Support)'
     ],
     image: MEHNDI_PACKAGE_IMAGE,
     alt: 'Elite Executive Convoy package with Maybach, Range Rover, Prado, and Revo Hilux',
   },
   {
     id: 'package-3',
-    name: 'Royal Vogue Groom Entry',
+    name: 'elite barat package',
     cars: [
       { count: 1, name: 'Mercedes Maybach' },
       { count: 2, name: 'Range Rover Vogue' },
@@ -64,17 +60,14 @@ export const PACKAGES = [
     features: [
       '1x Mercedes Maybach (Royal Carriage)',
       '2x Range Rover Vogue (VVIP Escorts)',
-      'Fuel Cost Included',
-      'Protocol styling / VIP treatment',
-      'Professional Chauffeurs',
-      '12-Hour Shift Duration'
+      'Fuel Cost Included'
     ],
     image: VIP_GROOM_ENTRY_IMAGE,
     alt: 'Royal Vogue Groom Entry package with Maybach and Range Rover Vogue escorts',
   },
   {
     id: 'package-4',
-    name: 'Premium SUV Convoy',
+    name: 'Premium barat package',
     cars: [
       { count: 1, name: 'Range Rover' },
       { count: 10, name: 'Prado TXL' },
@@ -86,9 +79,7 @@ export const PACKAGES = [
       '1x Range Rover Vogue (VIP Lead)',
       '10x Toyota Prado TXL (Heavy SUV Protocol)',
       'Fuel Cost Included',
-      'Flower Decoration on Lead Vehicle',
-      'Professional Chauffeurs included',
-      '12-Hour Shift Duration'
+      'Flower Decoration on Lead Vehicle'
     ],
     image: FULL_WEDDING_TRANSPORT_IMAGE,
     alt: 'Premium SUV Convoy package with Range Rover and Toyota Prado TXL protocol',
