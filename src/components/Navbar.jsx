@@ -29,6 +29,15 @@ export default function Navbar() {
     }
   }, [open])
 
+  const scrollToSection = (id) => (e) => {
+    e.preventDefault()
+    setOpen(false)
+    const section = document.getElementById(id)
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <header className="sticky top-0 z-50 bg-[#0D0F12]/80 backdrop-blur-md border-b border-white/10 transition-all duration-300">
       <motion.nav
@@ -69,7 +78,8 @@ export default function Navbar() {
             {links.map((link) => (
               <a
                 key={link.href}
-                href={link.href}
+                href={`#${link.href}`}
+                onClick={scrollToSection(link.href)}
                 className="relative py-1.5 whitespace-nowrap text-xs font-semibold uppercase tracking-wider text-neutral-300 hover:text-white transition group"
               >
                 {link.label}
@@ -144,12 +154,12 @@ export default function Navbar() {
                 {links.map((link, idx) => (
                   <motion.a
                     key={link.href}
-                    href={link.href}
+                    href={`#${link.href}`}
+                    onClick={scrollToSection(link.href)}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.2, delay: 0.05 * idx }}
                     className="rounded-lg px-4 py-3 text-sm font-semibold uppercase tracking-wider text-neutral-300 hover:bg-white/5 hover:text-[#D4AF37] transition"
-                    onClick={() => setOpen(false)}
                   >
                     {link.label}
                   </motion.a>
