@@ -1,8 +1,8 @@
 import {
-  BARAT_PACKAGE_IMAGE,
-  MEHNDI_PACKAGE_IMAGE,
-  VIP_GROOM_ENTRY_IMAGE,
-  FULL_WEDDING_TRANSPORT_IMAGE,
+  ELITE_BARAT_PACKAGE_IMAGE,
+  EXECUTIVE_BARAT_PACKAGE_IMAGE ,
+  PREMIUM_BARAT_PACKAGE_IMAGE ,
+  ROYAL_BARAT_PACKAGE_IMAGE ,
 } from '../constants/carImages'
 
 export const PACKAGES = [
@@ -23,7 +23,7 @@ export const PACKAGES = [
       '10x Honda Civics (Barat Convoy)',
       'Fuel & Flower Decoration Included'
     ],
-    image: BARAT_PACKAGE_IMAGE,
+    image: ROYAL_BARAT_PACKAGE_IMAGE,
     alt: 'Royal Barat Wedding Package with Maybach, Audi A6 and Honda Civics',
   },
   {
@@ -44,7 +44,7 @@ export const PACKAGES = [
       '1x Prado TXL (Protocol Guard)',
       '1x Toyota Revo Hilux (Utility Support)'
     ],
-    image: MEHNDI_PACKAGE_IMAGE,
+    image: EXECUTIVE_BARAT_PACKAGE_IMAGE,
     alt: 'Elite Executive Convoy package with Maybach, Range Rover, Prado, and Revo Hilux',
   },
   {
@@ -62,7 +62,7 @@ export const PACKAGES = [
       '2x Range Rover Vogue (VVIP Escorts)',
       'Fuel Cost Included'
     ],
-    image: VIP_GROOM_ENTRY_IMAGE,
+    image: ELITE_BARAT_PACKAGE_IMAGE,
     alt: 'Royal Vogue Groom Entry package with Maybach and Range Rover Vogue escorts',
   },
   {
@@ -81,7 +81,7 @@ export const PACKAGES = [
       'Fuel Cost Included',
       'Flower Decoration on Lead Vehicle'
     ],
-    image: FULL_WEDDING_TRANSPORT_IMAGE,
+    image: PREMIUM_BARAT_PACKAGE_IMAGE,
     alt: 'Premium SUV Convoy package with Range Rover and Toyota Prado TXL protocol',
   },
 ]

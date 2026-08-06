@@ -115,75 +115,7 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          <motion.form
-            onSubmit={onSubmit}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.22 }}
-            transition={{ duration: 0.65, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-2xl border border-cyan/20 bg-dark-card p-8"
-          >
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan">
-              Send a message
-            </p>
-            <p className="mt-2 text-xl font-bold text-ivory-warm">Reach us on WhatsApp</p>
-
-            <div className="mt-8 space-y-5">
-              {[
-                { name: 'name', label: 'Name', type: 'text', placeholder: 'Your name' },
-                { name: 'phone', label: 'Phone', type: 'tel', placeholder: '03xx xxxxxxx' },
-              ].map(({ name, label, type, placeholder }) => (
-                <label key={name} className="block text-sm font-medium text-muted">
-                  {label}
-                  <input
-                    required
-                    type={type}
-                    name={name}
-                    autoComplete={name}
-                    value={form[name]}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, [name]: e.target.value }))
-                    }
-                    className="mt-2 w-full rounded-xl border border-border bg-dark-card px-4 py-3 text-sm text-ivory-warm outline-none transition focus:border-cyan/50 focus:ring-1 focus:ring-cyan/30"
-                    placeholder={placeholder}
-                  />
-                </label>
-              ))}
-              <label className="block text-sm font-medium text-muted">
-                Message
-                <textarea
-                  name="message"
-                  rows={4}
-                  value={form.message}
-                  onChange={(e) =>
-                    setForm((f) => ({ ...f, message: e.target.value }))
-                  }
-                  className="mt-2 w-full resize-none rounded-xl border border-border bg-dark-card px-4 py-3 text-sm text-ivory-warm outline-none transition focus:border-cyan/50 focus:ring-1 focus:ring-cyan/30"
-                  placeholder="Dates, route, vehicles, or special requests."
-                />
-              </label>
-            </div>
-
-            <motion.button
-              type="submit"
-              whileHover={{ y: -1 }}
-              whileTap={{ scale: 0.98 }}
-              className="mt-8 w-full rounded-full bg-cyan py-3 text-sm font-bold uppercase tracking-wide text-[#17130a]"
-            >
-              Send via WhatsApp
-            </motion.button>
-
-            {submitted ? (
-              <p className="mt-4 text-center text-xs text-cyan">
-                Opening WhatsApp with your message…
-              </p>
-            ) : (
-              <p className="mt-4 text-center text-xs text-muted">
-                Submissions open your WhatsApp chat prefilled for quick
-                confirmation.
-              </p>
-            )}
-          </motion.form>
+         
         </div>
       </div>
     </section>
