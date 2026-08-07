@@ -3,7 +3,7 @@ export const DEFAULT_CAR_IMAGE = '/car%20pic.webp'
 
 export const heroImage = DEFAULT_CAR_IMAGE
 
-export const aboutImage = '/About%20Image.webp'
+export const aboutImage = '/About%20Image.jpeg'
 
 // Specific car images (matching files in /public)
 export const AUDI_A6_IMAGE = '/audiA6.jpeg'
